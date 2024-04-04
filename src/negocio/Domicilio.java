@@ -54,4 +54,15 @@ public class Domicilio {
     public void setCodigoPostal(String codigoPostal) {
         this.codigoPostal = codigoPostal;
     }
+
+    @Override
+    public String toString() {
+        return "Domicilio{" +
+                "calle='" + calle + '\'' +
+                ", numero='" + numero + '\'' +
+                ", colonia='" + colonia + '\'' +
+                ", estado='" + estado + '\'' +
+                ", codigoPostal='" + codigoPostal + '\'' +
+                '}';
+    }
 }
