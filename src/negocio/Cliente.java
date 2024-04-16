@@ -2,7 +2,7 @@ package negocio;
 
 import java.util.ArrayList;
 
-public class Cliente implements IServicioClientes {
+public class Cliente implements IServicioCuentas {
     private int numero;
     private String nombre;
     private String apellido;
@@ -34,6 +34,18 @@ public class Cliente implements IServicioClientes {
         this.setFechaNacimiento(fechaNacimiento);
     }
 
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "numero=" + numero +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", domicilio=" + domicilio +
+                ", rfc='" + rfc + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", fechaNacimiento='" + fechaNacimiento + '\'' +
+                '}';
+    }
 
     public int getNumero() {
         return numero;
@@ -100,45 +112,28 @@ public class Cliente implements IServicioClientes {
     }
 
     @Override
-    public String toString() {
-        return "Cliente{" +
-                "numero=" + numero +
-                ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", domicilio=" + domicilio +
-                ", rfc='" + rfc + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", fechaNacimiento='" + fechaNacimiento + '\'' +
-                '}';
+    public boolean agregarCuenta(Cuenta cuenta) {
+        return this.cuentas.add(cuenta);
     }
 
     @Override
-    public boolean agregarCliente(Cliente cliente) {
-        return false;
+    public boolean cancelarCuenta(int numeroCuenta) {
+        return this.cuentas.removeIf(cuenta -> cuenta.getNumeroCuenta() == numeroCuenta);
     }
 
     @Override
-    public boolean eliminarCliente(int numero) {
-        return false;
+    public boolean abonar(int numeroCuenta, double cantidad) {
+        return this.cuentas.stream().anyMatch(cuenta -> cuenta.getNumeroCuenta() == numeroCuenta && cuenta.abonar(cantidad));
     }
 
     @Override
-    public Cliente consultaCliente(int numero) {
-        return null;
+    public boolean retirar(int numeroCuenta, double cantidad) {
+        return this.abonar(numeroCuenta, -cantidad);
     }
 
     @Override
-    public ArrayList<Cliente> obtenerClientes() {
-        return null;
+    public Cuenta obtenerCuenta(int numeroCuenta) {
+        return this.cuentas.stream().filter(cuenta -> cuenta.getNumeroCuenta() == numeroCuenta).findFirst().orElse(null);
     }
 
-    @Override
-    public Cliente buscarClientePorRfc(String rfc) {
-        return null;
-    }
-
-    @Override
-    public void listarClientes() {
-
-    }
 }
