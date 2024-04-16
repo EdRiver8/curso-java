@@ -2,31 +2,45 @@ package negocio;
 
 import java.util.ArrayList;
 
-public class Cliente {
-    public Integer numeroCliente;
-    public String nombre;
-    public String rfc;
-    public String telefono;
-    public String fechaNacimiento;
-    public Domicilio domicilio;
-    public ArrayList<Cuenta> cuentas;
+public class Cliente implements IServicioClientes {
+    private int numero;
+    private String nombre;
+    private String apellido;
+    private Domicilio domicilio;
+    private String rfc;
+    private String telefono;
+    private ArrayList<Cuenta> cuentas;
+    private String fechaNacimiento;
 
-    public Cliente(Integer numeroCliente, String nombre, String rfc, String telefono, String fechaNacimiento, Domicilio domicilio, ArrayList<Cuenta> cuentas) {
-        this.numeroCliente = numeroCliente;
-        this.nombre = nombre;
-        this.rfc = rfc;
-        this.telefono = telefono;
-        this.fechaNacimiento = fechaNacimiento;
-        this.domicilio = domicilio;
-        this.cuentas = cuentas;
+    public Cliente(int numero, String nombre, String apellido, Domicilio domicilio, String rfc, String telefono, String fechaNacimiento) {
+        this.setNumero(numero);
+        this.setNombre(nombre);
+        this.setApellido(apellido);
+        this.setDomicilio(domicilio);
+        this.setRfc(rfc);
+        this.setTelefono(telefono);
+        this.setCuentas(new ArrayList<>());
+        this.setFechaNacimiento(fechaNacimiento);
     }
 
-    public Integer getNumeroCliente() {
-        return numeroCliente;
+    public Cliente(int num, String nombre, String apellido, String calle, String numero, String colonia, String estado, String codigoPostal, String rfc, String telefono, String fechaNacimiento) {
+        this.setNumero(num);
+        this.setNombre(nombre);
+        this.setApellido(apellido);
+        this.domicilio=new Domicilio(calle,numero,colonia,estado,codigoPostal);;
+        this.setRfc(rfc);
+        this.setTelefono(telefono);
+        this.setCuentas(new ArrayList<>());
+        this.setFechaNacimiento(fechaNacimiento);
     }
 
-    public void setNumeroCliente(Integer numeroCliente) {
-        this.numeroCliente = numeroCliente;
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
     public String getNombre() {
@@ -35,6 +49,22 @@ public class Cliente {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public Domicilio getDomicilio() {
+        return domicilio;
+    }
+
+    public void setDomicilio(Domicilio domicilio) {
+        this.domicilio = domicilio;
     }
 
     public String getRfc() {
@@ -53,22 +83,6 @@ public class Cliente {
         this.telefono = telefono;
     }
 
-    public String getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(String fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public Domicilio getDomicilio() {
-        return domicilio;
-    }
-
-    public void setDomicilio(Domicilio domicilio) {
-        this.domicilio = domicilio;
-    }
-
     public ArrayList<Cuenta> getCuentas() {
         return cuentas;
     }
@@ -77,16 +91,54 @@ public class Cliente {
         this.cuentas = cuentas;
     }
 
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
     @Override
     public String toString() {
         return "Cliente{" +
-                "numeroCliente=" + numeroCliente +
+                "numero=" + numero +
                 ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", domicilio=" + domicilio +
                 ", rfc='" + rfc + '\'' +
                 ", telefono='" + telefono + '\'' +
                 ", fechaNacimiento='" + fechaNacimiento + '\'' +
-                ", domicilio=" + domicilio +
-                ", cuentas=" + cuentas +
                 '}';
+    }
+
+    @Override
+    public boolean agregarCliente(Cliente cliente) {
+        return false;
+    }
+
+    @Override
+    public boolean eliminarCliente(int numero) {
+        return false;
+    }
+
+    @Override
+    public Cliente consultaCliente(int numero) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Cliente> obtenerClientes() {
+        return null;
+    }
+
+    @Override
+    public Cliente buscarClientePorRfc(String rfc) {
+        return null;
+    }
+
+    @Override
+    public void listarClientes() {
+
     }
 }

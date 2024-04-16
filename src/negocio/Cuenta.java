@@ -13,6 +13,22 @@ public abstract class Cuenta {
         this.fechaCancelacion = fechaCancelacion;
     }
 
+    public boolean abonar(Double cantidad) {
+        if (cantidad > 0) {
+            saldo += cantidad;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean retirar(Double cantidad) {
+        if (cantidad > 0 && cantidad <= saldo) {
+            saldo -= cantidad;
+            return true;
+        }
+        return false;
+    }
+
     public Integer getNumeroCuenta() {
         return numeroCuenta;
     }
